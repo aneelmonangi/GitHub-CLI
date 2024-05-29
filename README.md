@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # GitHub CLI Application
 
 This is a command-line interface (CLI) application to interact with GitHub, allowing you to create pull requests programmatically.
@@ -105,3 +106,8 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 This setup ensures that you only need to use one plugin to handle the creation of an executable JAR, making your `pom.xml` simpler and easier to manage.
 
 	
+=======
+# GitHub-CLI
+
+GitHub CLI Automation
+>>>>>>> 8eb645c (Update README.md)
