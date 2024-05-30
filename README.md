@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # GitHub CLI Application
 
 This is a command-line interface (CLI) application to interact with GitHub, allowing you to create pull requests programmatically.
@@ -7,6 +6,7 @@ This is a command-line interface (CLI) application to interact with GitHub, allo
 
 - [Introduction](#introduction)
 - [Features](#features)
+- [Extensibility](#extensibility)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Build Instructions](#build-instructions)
@@ -31,6 +31,17 @@ This CLI application allows you to create pull requests and merge pull requests 
 - Specify repository, title, head branch, and base branch
 - Authentication via GitHub access token
 
+
+## Extensibility
+
+The GitHub CLI application is designed with extensibility in mind. It can be easily extended to incorporate additional features and interact with various other GitHub APIs. Some potential enhancements include:
+
+- Interacting with repositories: listing, creating, updating, and deleting
+- Managing Pull Requests: listing, creating, updating, and merging
+- Handling Issues: listing, creating, updating, and closing
+- Exploring Forks: listing, forking, and syncing
+- Tracking Commits: listing, comparing, and cherry-picking
+
 ## Prerequisites
 
 - Java Development Kit (JDK) 8 or higher
@@ -40,9 +51,12 @@ This CLI application allows you to create pull requests and merge pull requests 
 
 1. Clone the repository:
 
-	git clone https://github.com/aneelmonangi/GitHub-CLI.git
+```
+git clone https://github.com/aneelmonangi/GitHub-CLI.git
 
-	cd GitHub-CLI
+cd GitHub-CLI
+```
+
 
 Update config.properties for OWNER(GitHub user)
 
@@ -62,9 +76,12 @@ To authenticate with the GitHub API, you need to set up your GitHub access token
 1. Open PowerShell.
 2. Set Environment Variable in PowerShell Session using the following command:
 
-    $env:GITHUB_TOKEN="=your_access_token"
+	```
+	$env:GITHUB_TOKEN="your_access_token"
+	```
+
 After setting it, you can verify that it's set by running:
-	
+
 	echo $env:GITHUB_TOKEN
 
 #### On macOS/Linux
@@ -72,7 +89,9 @@ After setting it, you can verify that it's set by running:
 
 2. Set the environment variable using the following command:
 
-	export GITHUB_TOKEN=your_access_token
+	```
+	export GITHUB_TOKEN="your_access_token"
+	```
 
 ### Usage
 Once you have set up the environment variable, you can use the CLI application to create pull requests.
@@ -106,8 +125,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 This setup ensures that you only need to use one plugin to handle the creation of an executable JAR, making your `pom.xml` simpler and easier to manage.
 
 	
-=======
-# GitHub-CLI
-
-GitHub CLI Automation
->>>>>>> 8eb645c (Update README.md)
