@@ -21,7 +21,7 @@ This is a command-line interface (CLI) application to interact with GitHub, allo
 
 ## Introduction
 
-This CLI application allows you to create pull requests and merge the pull requests on GitHub from the command line. It's designed to be simple and easy to use, making it easier for developers to integrate pull request creation into their workflows.
+This CLI application allows you to create pull requests and merge pull requests on GitHub from the command line. It's designed to be simple and easy to use, making it easier for developers to integrate pull request creation into their workflows.
 
 ## Features
 
@@ -40,7 +40,9 @@ This CLI application allows you to create pull requests and merge the pull reque
 1. Clone the repository:
 
 	git clone https://github.com/aneelmonangi/GitHub-CLI.git
+	
 	cd GitHub-CLI
+
 Update config.properties for OWNER(GitHub user)
 
 ### Build Instructions
