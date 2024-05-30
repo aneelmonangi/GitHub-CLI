@@ -40,7 +40,7 @@ This CLI application allows you to create pull requests and merge pull requests 
 1. Clone the repository:
 
 	git clone https://github.com/aneelmonangi/GitHub-CLI.git
-	
+
 	cd GitHub-CLI
 
 Update config.properties for OWNER(GitHub user)
