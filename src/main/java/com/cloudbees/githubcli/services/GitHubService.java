@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class GitHubService {
@@ -36,7 +37,7 @@ public class GitHubService {
 		requestBody.put("base", base);
 
 		try {
-			return makePostRequest(url, requestBody);
+			return verifyAndMakePullRequest(repo, requestBody); // makePostRequest(url, requestBody);
 		} catch (IOException e) {
 			return "Error making request: " + e.getMessage();
 		}
@@ -52,9 +53,12 @@ public class GitHubService {
 		}
 	}
 
-	private String makePostRequest(String urlString, Map<String, String> requestBody) throws IOException {
+	private String makePostRequest(String urlString, Map<String, String> requestBody, String method)
+			throws IOException {
 		URL url = new URL(urlString);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//		connection.setRequestMethod(method);
+		connection.setRequestProperty("X-HTTP-Method-Override", method);
 		connection.setRequestMethod("POST");
 		connection.setRequestProperty("Authorization", "Bearer " + token);
 		connection.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -96,6 +100,47 @@ public class GitHubService {
 				response.append(responseLine.trim());
 			}
 			return response.toString();
+		}
+	}
+
+	private String verifyAndMakePullRequest(String repo, Map<String, String> requestBody) throws IOException {
+		String urlString = String.format("https://api.github.com/repos/%s/%s/pulls", OWNER, repo);
+		URL url = new URL(urlString);
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		connection.setRequestMethod("GET");
+		connection.setRequestProperty("Authorization", "Bearer " + token);
+		connection.setRequestProperty("Content-Type", "application/json; utf-8");
+		connection.setRequestProperty("Accept", "application/vnd.github+json");
+		connection.setRequestProperty("X-GitHub-Api-Version", "2022-11-28");
+		connection.setDoOutput(true);
+
+		try (BufferedReader br = new BufferedReader(
+				new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+			StringBuilder response = new StringBuilder();
+			String responseLine;
+			while ((responseLine = br.readLine()) != null) {
+				response.append(responseLine.trim());
+			}
+
+//			System.out.println(response.toString());
+			List<Map> mapper = objectMapper.readValue(response.toString(), List.class);
+			if(mapper.size()>0) {
+				int number = (int) mapper.get(0).get("number");
+				requestBody.put("state", "open");
+				String updatedUrl = urlString + "/" + number;
+				System.out.println(updatedUrl);
+				return makePostRequest(updatedUrl, requestBody, "PATCH");
+			} else {
+				String prUrl = String.format("%s/repos/%s/%s/pulls", API_URL, OWNER, repo);
+				return makePostRequest(prUrl, requestBody, "POST");
+			}
+			
+			/*
+			 * if (state.equals("open")) { requestBody.put("state", "open"); return
+			 * makePostRequest(urlString + "/" + number, requestBody, "PATCH"); } else {
+			 * String prUrl = String.format("%s/repos/%s/%s/pulls", API_URL, OWNER, repo);
+			 * return makePostRequest(prUrl, requestBody, "POST"); }
+			 */
 		}
 	}
 }
