@@ -41,7 +41,7 @@ The GitHub CLI application is designed with extensibility in mind. It can be eas
 - Handling Issues: listing, creating, updating, and closing
 - Exploring Forks: listing, forking, and syncing
 - Tracking Commits: listing, comparing, and cherry-picking
-- Can be added listing PRs
+- Can be added listing PRs along with new details
 
 ## Prerequisites
 
